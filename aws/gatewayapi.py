@@ -26,7 +26,7 @@ def lambda_function(event, context):
         # copy apis to an s3 bucket along with the error message
         data = f'Error converting data to JSON: {e}\n\nData: {event}'
         
-        error_object_key = f'rt_data_error_{timestamp}.txt'
+        error_object_key = f'rt-data-error-{timestamp}.txt'
         s3_client.put_object(Bucket=error_bucket_name, Key=error_object_key, Body=data)
         print(f"Error data uploaded to S3 bucket '{error_bucket_name}' with object key '{error_object_key}'")
         
@@ -36,7 +36,7 @@ def lambda_function(event, context):
         }
         
     # Define the bucket name and object key with a timestamp to the ms to avoid overwriting existing data
-    object_key = f'rt_data_{timestamp}.json'
+    object_key = f'rt-data-{timestamp}.json'
 
     # Upload the JSON data to the S3 bucket
     s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=json_data)
