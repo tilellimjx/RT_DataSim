@@ -15,10 +15,10 @@ phases:
       - pip install -r aws/gatewayapi_requirements.txt -t .
   build:
     commands:
-      # Copy Lambda source code into package/
-      #- cp aws/*.py package/
+      # Copy Lambda source code into root of build directory
+      - cp aws/*.py .
 
 artifacts:
   files:
-    - 'aws/*'
+    - '**/*.py'
   #base-directory: package
