@@ -1,5 +1,5 @@
 # this will gather the data from the api call and copy it to an s3 bucket
-import datetime
+from datetime import datetime
 import boto3
 import json
 
