@@ -3,7 +3,7 @@ import datetime
 import boto3
 import json
 
-def lambda_handler(event, context):
+def lambda_function(event, context):
     # Create a client for the API Gateway service
     client = boto3.client('apigateway')
 
