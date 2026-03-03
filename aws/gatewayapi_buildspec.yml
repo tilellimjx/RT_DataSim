@@ -6,17 +6,17 @@ phases:
       python: 3.11
     commands:
       # Refresh yum metadata
-      - yum clean all
-      - yum update -y
+      #- yum clean all
+      #- yum update -y
 
       # Install Development Tools (gcc, make, etc.)
-      - yum groupinstall -y "Development Tools"
+      #- yum groupinstall -y "Development Tools"
 
       - pip install -r aws/gatewayapi_requirements.txt -t .
   build:
     commands:
       # Copy Lambda source code into package/
-      - cp aws/*.py package/
+      #- cp aws/*.py package/
 
 artifacts:
   files:
