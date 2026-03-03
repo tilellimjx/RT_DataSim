@@ -20,5 +20,5 @@ phases:
 
 artifacts:
   files:
-    - '**/*'
-  base-directory: package
+    - 'aws/*'
+  #base-directory: package
