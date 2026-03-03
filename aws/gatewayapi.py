@@ -9,8 +9,8 @@ def lambda_function(event, context):
 
     # Create a client for the S3 service
     s3_client = boto3.client('s3')
-    bucket_name = 'your-s3-bucket-name'
-    error_bucket_name = 'your-s3-error-bucket-name'
+    bucket_name = 'rt-json-data'
+    error_bucket_name = 'rt-json-error-data'
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
 
     # Get the list of APIs
