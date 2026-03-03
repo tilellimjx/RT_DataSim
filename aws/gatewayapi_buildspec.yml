@@ -6,7 +6,7 @@ phases:
       - pip install -r aws/gatewayapi_requirements.txt -t .
   build:
     commands:
-      - zip -r function.zip .
+      - zip -r function.zip ./aws
 
 artifacts:
   files:
