@@ -4,6 +4,8 @@ import boto3
 import json
 
 def lambda_function(event, context):
+    print("Received event: " + json.dumps(event, indent=2))
+    
     # Create a client for the API Gateway service
     client = boto3.client('apigateway')
 
@@ -15,9 +17,11 @@ def lambda_function(event, context):
 
     # Get the list of APIs
     response = client.get_rest_apis()
+    print("API Gateway response: " + json.dumps(response, indent=2))
 
     # Extract the relevant data from the response
     apis = response['items']
+    print("Extracted APIs: " + json.dumps(apis, indent=2))
 
     # try to get the json data from the response and handle any exceptions
     try:
@@ -42,6 +46,7 @@ def lambda_function(event, context):
 
     # Upload the JSON data to the S3 bucket
     s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=json_data)
+    print(f"Data uploaded to S3 bucket '{bucket_name}' with object key '{object_key}'")
 
     return {
         'statusCode': 200,
