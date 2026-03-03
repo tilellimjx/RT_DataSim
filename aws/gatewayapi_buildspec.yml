@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     commands:
-      - pip install -r gatewayapi_requirements.txt -t .
+      - pip install -r aws/gatewayapi_requirements.txt -t .
   build:
     commands:
       - zip -r function.zip .
