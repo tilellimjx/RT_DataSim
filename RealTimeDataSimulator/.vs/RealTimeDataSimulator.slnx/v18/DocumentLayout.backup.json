@@ -1,0 +1,85 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|c:\\users\\tilel\\onedrive\\documents\\github\\rtdatasim\\realtimedatasimulator\\senddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|solutionrelative:senddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|c:\\users\\tilel\\onedrive\\documents\\github\\rtdatasim\\realtimedatasimulator\\createdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|solutionrelative:createdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|c:\\users\\tilel\\onedrive\\documents\\github\\rtdatasim\\realtimedatasimulator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|c:\\users\\tilel\\onedrive\\documents\\github\\rtdatasim\\realtimedatasimulator\\rtdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0FB37995-7D87-9505-0819-3BCCB3AD82D2}|RealTimeDataSimulator.csproj|solutionrelative:rtdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RTData.cs",
+              "DocumentMoniker": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\RTData.cs",
+              "RelativeDocumentMoniker": "RTData.cs",
+              "ToolTip": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\RTData.cs",
+              "RelativeToolTip": "RTData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T19:28:20.304Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SendData.cs",
+              "DocumentMoniker": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\SendData.cs",
+              "RelativeDocumentMoniker": "SendData.cs",
+              "ToolTip": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\SendData.cs",
+              "RelativeToolTip": "SendData.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAAAowDAAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T19:19:35.301Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateData.cs",
+              "DocumentMoniker": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\CreateData.cs",
+              "RelativeDocumentMoniker": "CreateData.cs",
+              "ToolTip": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\CreateData.cs",
+              "RelativeToolTip": "CreateData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T19:18:22.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\tilel\\OneDrive\\Documents\\GitHub\\RTDataSim\\RealTimeDataSimulator\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-02T19:10:44.468Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

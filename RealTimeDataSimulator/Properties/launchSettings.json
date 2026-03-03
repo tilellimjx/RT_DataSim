@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RealTimeDataSimulator": {
+      "commandName": "Project",
+      "commandLineArgs": "create"
+    }
+  }
+}

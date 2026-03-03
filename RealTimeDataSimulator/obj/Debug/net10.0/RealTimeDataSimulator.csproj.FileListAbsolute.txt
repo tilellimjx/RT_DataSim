@@ -1,0 +1,14 @@
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\bin\Debug\net10.0\RealTimeDataSimulator.exe
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\bin\Debug\net10.0\RealTimeDataSimulator.deps.json
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\bin\Debug\net10.0\RealTimeDataSimulator.runtimeconfig.json
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\bin\Debug\net10.0\RealTimeDataSimulator.dll
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\bin\Debug\net10.0\RealTimeDataSimulator.pdb
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.AssemblyInfoInputs.cache
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.AssemblyInfo.cs
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.csproj.CoreCompileInputs.cache
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.dll
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\refint\RealTimeDataSimulator.dll
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.pdb
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\RealTimeDataSimulator.genruntimeconfig.cache
+C:\Users\tilel\OneDrive\Documents\GitHub\RTDataSim\RealTimeDataSimulator\obj\Debug\net10.0\ref\RealTimeDataSimulator.dll
