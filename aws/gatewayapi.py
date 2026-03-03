@@ -15,23 +15,15 @@ def lambda_function(event, context):
     error_bucket_name = 'rt-json-error-data'
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S-%f')
 
-    # Get the list of APIs
-    response = client.get_rest_apis()
-    print("API Gateway response: " + json.dumps(response, indent=2))
-
-    # Extract the relevant data from the response
-    apis = response['items']
-    print("Extracted APIs: " + json.dumps(apis, indent=2))
-
     # try to get the json data from the response and handle any exceptions
     try:
-        json_data = json.dumps(apis)
+        json_data = json.dumps(event)
     except (TypeError, ValueError) as e:
         # log the error to cloudwatch logs
         print(f"Error converting data to JSON: {e}")
         
         # copy apis to an s3 bucket along with the error message
-        data = f'Error converting data to JSON: {e}\n\nData: {apis}'
+        data = f'Error converting data to JSON: {e}\n\nData: {event}'
         
         error_object_key = f'gateway_apis_error_{timestamp}.txt'
         s3_client.put_object(Bucket=error_bucket_name, Key=error_object_key, Body=data)
