@@ -35,6 +35,7 @@ def lambda_function(event, context):
         
         error_object_key = f'gateway_apis_error_{timestamp}.txt'
         s3_client.put_object(Bucket=error_bucket_name, Key=error_object_key, Body=data)
+        print(f"Error data uploaded to S3 bucket '{error_bucket_name}' with object key '{error_object_key}'")
         
         return {
             'statusCode': 500,
