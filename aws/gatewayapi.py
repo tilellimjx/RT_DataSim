@@ -4,19 +4,15 @@ import boto3
 import json
 
 def lambda_function(event, context):
-    #print("Received event: " + json.dumps(event, indent=2))
-    
     # Create a client for the S3 service
     s3_client = boto3.client('s3')
-    bucket_name = 'rt-json-data'
-    error_bucket_name = 'rt-json-error-data'
     timestamp = datetime.now().strftime('%Y-%m-%d-%H-%M-%S-%f')
 
     # try to get the json data from the response and handle any exceptions
     try:
         json_data = json.dumps(event).encode("utf-8")
-        #print(f'type(json_data): {type(json_data)}')
     except (TypeError, ValueError) as e:
+        error_bucket_name = 'rt-json-error-data'
         # log the error to cloudwatch logs
         print(f"Error converting data to JSON: {e}")
         
@@ -33,11 +29,11 @@ def lambda_function(event, context):
         }
         
     # Define the bucket name and object key with a timestamp to the ms to avoid overwriting existing data
+    bucket_name = 'rt-json-data'
     object_key = f'rt-data-{timestamp}.json'
 
     # Upload the JSON data to the S3 bucket
     s3_client.put_object(Bucket=bucket_name, Key=object_key, Body=json_data)
-    #print(f"Data uploaded to S3 bucket '{bucket_name}' with object key '{object_key}'")
 
     return {
         'statusCode': 200,
