@@ -2,21 +2,22 @@ using System;
 
 namespace RealTimeDataSimulator
 {
-`tinternal class RTData
-`t{
-`t`tpublic string? device_id { get; set; }
-`t`tpublic DateTime timestamp { get; set; }
-`t`tpublic decimal temperature { get; set; }
-`t`tpublic decimal humidity { get; set; }
-`t`tpublic decimal battery_level { get; set; }
-`t`tpublic Location? location { get; set; }
-`t`tpublic string? status { get; set; }
-`t}
+	internal class RTData
+	{
+		public string? device_id { get; set; }
+		public DateTime timestamp { get; set; }
+		public decimal temperature { get; set; }
+		public decimal humidity { get; set; }
+		public decimal battery_level { get; set; }
+		public Location? location { get; set; }
+		public string? status { get; set; }
+	}
 
-`tinternal class Location
-`t{
-`t`tpublic decimal latitude { get; set; }
-`t`tpublic decimal longitude { get; set; }
-`t}
+	internal class Location
+	{
+		public decimal latitude { get; set; }
+		public decimal longitude { get; set; }
+	}
 }
+
 
