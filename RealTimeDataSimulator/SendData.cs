@@ -1,137 +1,141 @@
+using System;
+using System.IO;
+using System.Net.Http;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Collections.Generic;
+
 namespace RealTimeDataSimulator
 {
-    internal class SendData
-    {
-        private static readonly System.Net.Http.HttpClient _httpClient = new() { Timeout = System.TimeSpan.FromSeconds(30) };
-        private static readonly string _endpoint = System.Environment.GetEnvironmentVariable("HTTP_ENDPOINT") ?? "https://pqxu4yuom8.execute-api.us-east-2.amazonaws.com/version1";
-        private static readonly System.Threading.SemaphoreSlim _fileWriteSemaphore = new(1, 1);
+`tinternal class SendData
+`t{
+`t`tprivate static readonly HttpClient _httpClient = new() { Timeout = TimeSpan.FromSeconds(30) };
+`t`tprivate static readonly string _endpoint = Environment.GetEnvironmentVariable("HTTP_ENDPOINT") ?? "https://pqxu4yuom8.execute-api.us-east-2.amazonaws.com/version1";
+`t`tprivate static readonly SemaphoreSlim _fileWriteSemaphore = new(1, 1);
 
-        private static async System.Threading.Tasks.Task LogErrorAsync(int fileIndex, System.Exception ex, string? payload = null)
-        {
-            try
-            {
-                string logPath = $@"C:\Temp\data\SendErrorsLog.txt";
-                string timestamp = System.DateTime.UtcNow.ToString("o");
-                string body = $"[{timestamp}] File {fileIndex}: {ex.GetType().FullName}: {ex.Message}\n{ex}\n";
-                if (!string.IsNullOrEmpty(payload))
-                {
-                    body += $"Payload: {payload}\n";
-                }
-                body += "----\n";
+`t`tprivate static async Task LogErrorAsync(int fileIndex, Exception ex, string? payload = null)
+`t`t{
+`t`t`ttry
+`t`t`t{
+`t`t`t`tstring logPath = $@"C:\Temp\data\SendErrorsLog.txt";
+`t`t`t`tstring timestamp = DateTime.UtcNow.ToString("o");
+`t`t`t`tstring body = $"[{timestamp}] File {fileIndex}: {ex.GetType().FullName}: {ex.Message}\n{ex}\n";
+`t`t`t`tif (!string.IsNullOrEmpty(payload))
+`t`t`t`t{
+`t`t`t`t`tbody += $"Payload: {payload}\n";
+`t`t`t`t}
+`t`t`t`tbody += "----\n";
 
-                await _fileWriteSemaphore.WaitAsync().ConfigureAwait(false);
-                try
-                {
-                    await System.IO.File.AppendAllTextAsync(logPath, body).ConfigureAwait(false);
-                }
-                finally
-                {
-                    _fileWriteSemaphore.Release();
-                }
-            }
-            catch
-            {
-                // best-effort logging; swallow to avoid recursive failures
-            }
-        }
+`t`t`t`tawait _fileWriteSemaphore.WaitAsync().ConfigureAwait(false);
+`t`t`t`ttry
+`t`t`t`t{
+`t`t`t`t`tawait File.AppendAllTextAsync(logPath, body).ConfigureAwait(false);
+`t`t`t`t}
+`t`t`t`tfinally
+`t`t`t`t{
+`t`t`t`t`t_fileWriteSemaphore.Release();
+`t`t`t`t}
+`t`t`t}
+`t`t`tcatch
+`t`t`t{
+`t`t`t`t// best-effort logging; swallow
+`t`t`t}
+`t`t}
 
-        internal static async System.Threading.Tasks.Task StartSending()
-        {
-            // spawn 250 parallel tasks to read and send data from each file
-            var tasks = new System.Collections.Generic.List<System.Threading.Tasks.Task>();
-            for (int fileIndex = 1; fileIndex <= 250; fileIndex++)
-            {
-                int index = fileIndex; // capture variable for closure
-                tasks.Add(SendDataFromFileAsync(index));
-            }
+`t`tinternal static async Task StartSending()
+`t`t{
+`t`t`tvar tasks = new List<Task>();
+`t`t`tfor (int fileIndex = 1; fileIndex <= 250; fileIndex++)
+`t`t`t{
+`t`t`t`tint index = fileIndex; // capture variable for closure
+`t`t`t`ttasks.Add(SendDataFromFileAsync(index));
+`t`t`t}
 
-            await System.Threading.Tasks.Task.WhenAll(tasks).ConfigureAwait(false);
-        }
+`t`t`tawait Task.WhenAll(tasks).ConfigureAwait(false);
+`t`t}
 
-        internal static async System.Threading.Tasks.Task StartSendingSampleAsync(int fileCount)
-        {
-            var tasks = new System.Collections.Generic.List<System.Threading.Tasks.Task>();
-            for (int fileIndex = 1; fileIndex <= fileCount; fileIndex++)
-            {
-                tasks.Add(SendDataFromFileAsync(fileIndex));
-            }
-            await System.Threading.Tasks.Task.WhenAll(tasks).ConfigureAwait(false);
-        }
+`t`tinternal static async Task StartSendingSampleAsync(int fileCount)
+`t`t{
+`t`t`tvar tasks = new List<Task>();
+`t`t`tfor (int fileIndex = 1; fileIndex <= fileCount; fileIndex++)
+`t`t`t{
+`t`t`t`ttasks.Add(SendDataFromFileAsync(fileIndex));
+`t`t`t}
+`t`t`tawait Task.WhenAll(tasks).ConfigureAwait(false);
+`t`t}
 
-        private static async System.Threading.Tasks.Task SendDataFromFileAsync(int index)
-        {
-            string[] fileLines;
-            try
-            {
-                fileLines = System.IO.File.ReadAllLines($@"C:\Temp\data\datafile_{index}.txt");
-            }
-            catch (System.Exception ex)
-            {
-                await LogErrorAsync(index, ex).ConfigureAwait(false);
-                return;
-            }
+`t`tprivate static async Task SendDataFromFileAsync(int index)
+`t`t{
+`t`t`tstring[] fileLines;
+`t`t`ttry
+`t`t`t{
+`t`t`t`tfileLines = File.ReadAllLines($@"C:\Temp\data\datafile_{index}.txt");
+`t`t`t}
+`t`t`tcatch (Exception ex)
+`t`t`t{
+`t`t`t`tawait LogErrorAsync(index, ex).ConfigureAwait(false);
+`t`t`t`treturn;
+`t`t`t}
 
-            foreach (string line in fileLines)
-            {
-                var sw = System.Diagnostics.Stopwatch.StartNew();
-                try
-                {
-                    // send data asynchronously to endpoint with retries inside the method
-                    await SendToEndpointAsync(line).ConfigureAwait(false);
-                }
-                catch (System.Exception ex)
-                {
-                    // log any exceptions during sending (including failed retries)
-                    await LogErrorAsync(index, ex, line).ConfigureAwait(false);
-                }
+`t`t`tforeach (string line in fileLines)
+`t`t`t{
+`t`t`t`tvar sw = Stopwatch.StartNew();
+`t`t`t`ttry
+`t`t`t`t{
+`t`t`t`t`tawait SendToEndpointAsync(line).ConfigureAwait(false);
+`t`t`t`t}
+`t`t`t`tcatch (Exception ex)
+`t`t`t`t{
+`t`t`t`t`tawait LogErrorAsync(index, ex, line).ConfigureAwait(false);
+`t`t`t`t}
 
-                sw.Stop();
-                var remaining = System.TimeSpan.FromSeconds(1) - sw.Elapsed;
-                if (remaining > System.TimeSpan.Zero)
-                {
-                    await System.Threading.Tasks.Task.Delay(remaining).ConfigureAwait(false);
-                }
-            }
-        }
+`t`t`t`tsw.Stop();
+`t`t`t`tvar remaining = TimeSpan.FromSeconds(1) - sw.Elapsed;
+`t`t`t`tif (remaining > TimeSpan.Zero)
+`t`t`t`t{
+`t`t`t`t`tawait Task.Delay(remaining).ConfigureAwait(false);
+`t`t`t`t}
+`t`t`t}
+`t`t}
 
-        private static async System.Threading.Tasks.Task SendToEndpointAsync(string line)
-        {
-            const int maxAttempts = 3;
-            int attempt = 0;
-            System.Exception? lastEx = null;
+`t`tprivate static async Task SendToEndpointAsync(string line)
+`t`t{
+`t`t`tconst int maxAttempts = 3;
+`t`t`tint attempt = 0;
+`t`t`tException? lastEx = null;
 
-            while (attempt < maxAttempts)
-            {
-                attempt++;
-                try
-                {
-                    using var content = new System.Net.Http.StringContent(line, System.Text.Encoding.UTF8, "application/json");
-                    var response = await _httpClient.PostAsync(_endpoint, content).ConfigureAwait(false);
-                    response.EnsureSuccessStatusCode();
-                    return;
-                }
-                catch (System.Exception ex) when (ex is System.Net.Http.HttpRequestException || ex is System.Threading.Tasks.TaskCanceledException)
-                {
-                    lastEx = ex;
-                    if (attempt >= maxAttempts)
-                    {
-                        break;
-                    }
-                    // exponential backoff (in ms): 500, 1000, 2000... (attempt starts at 1)
-                    int delayMs = 500 * (int)System.Math.Pow(2, attempt - 1);
-                    await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(delayMs)).ConfigureAwait(false);
-                    continue;
-                }
-                catch (System.Exception ex)
-                {
-                    // non-transient error - capture and break
-                    lastEx = ex;
-                    break;
-                }
-            }
+`t`t`twhile (attempt < maxAttempts)
+`t`t`t{
+`t`t`t`tattempt++;
+`t`t`t`ttry
+`t`t`t`t{
+`t`t`t`t`tusing var content = new StringContent(line, Encoding.UTF8, "application/json");
+`t`t`t`t`tvar response = await _httpClient.PostAsync(_endpoint, content).ConfigureAwait(false);
+`t`t`t`t`tresponse.EnsureSuccessStatusCode();
+`t`t`t`t`treturn;
+`t`t`t`t}
+`t`t`t`tcatch (Exception ex) when (ex is HttpRequestException || ex is TaskCanceledException)
+`t`t`t`t{
+`t`t`t`t`tlastEx = ex;
+`t`t`t`t`tif (attempt >= maxAttempts)
+`t`t`t`t`t{
+`t`t`t`t`t`tbreak;
+`t`t`t`t`t}
+`t`t`t`t`tint delayMs = 500 * (int)Math.Pow(2, attempt - 1);
+`t`t`t`t`tawait Task.Delay(TimeSpan.FromMilliseconds(delayMs)).ConfigureAwait(false);
+`t`t`t`t`tcontinue;
+`t`t`t`t}
+`t`t`t`tcatch (Exception ex)
+`t`t`t`t{
+`t`t`t`t`tlastEx = ex;
+`t`t`t`t`tbreak;
+`t`t`t`t}
+`t`t`t}
 
-            // if we reach here, all attempts failed
-            throw lastEx ?? new System.Exception("Failed sending data to endpoint");
-        }
-    }
+`t`t`tthrow lastEx ?? new Exception("Failed sending data to endpoint");
+`t`t}
+`t}
 }
+

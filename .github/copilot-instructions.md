@@ -35,6 +35,7 @@ Key repo-specific conventions & gotchas
   - SendData spawns 250 tasks and uses a new HttpClient per SendToEndpoint call; this is a heavy concurrency pattern and may cause socket exhaustion in different environments. When updating network code, prefer reusing HttpClient or throttling concurrency.
   - Send cadence is enforced by Thread.Sleep to approximate one-second intervals per record; changing timing must respect that logic.
 - Data corruption simulation: CreateData introduces deterministic-patterned and random corruptions (decimal.MinValue used to mark corrupted numeric fields). Do not change the corruption sentinel without updating consumers.
+- Remove empty directories before committing: Git does not track empty directories. Delete any empty folders before check-in or add a placeholder file (for example, .gitkeep) when a directory must be preserved.
 
 Files to check first when changing behavior
 - RealTimeDataSimulator\CreateData.cs — file generation, corruption rules, write paths
@@ -46,6 +47,7 @@ AI assistant notes for copilot sessions
 - Paths are absolute by design (C:\Temp\data). If making data location configurable, update both CreateData and SendData.
 - No test projects detected — propose adding a test project (xUnit/NUnit) if requested; include guidance on how to run single tests (dotnet test --filter FullyQualifiedName=...) when tests are added.
 - No other AI assistant configs found (CLAUDE.md, .cursorrules, AGENTS.md, .windsurfrules, CONVENTIONS.md, etc.).
+- When performing code reviews, convert leading indentation from spaces to tabs and prefer using directives ("using ...;") over fully-qualified type names in C# files.
 
 If existing .github/copilot-instructions.md existed, propose: keep command examples, add explicit guidance for HttpClient reuse and concurrency safety, and document C:\Temp\data dependency.
 
