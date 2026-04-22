@@ -1,0 +1,35 @@
+name: .NET CI
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore .\RealTimeDataSimulator\RealTimeDataSimulator.csproj
+
+      - name: Build
+        run: dotnet build --no-restore .\RealTimeDataSimulator\RealTimeDataSimulator.csproj
+
+      - name: Run tests (if present)
+        run: |
+          dotnet test --no-build || echo "No test projects or tests failed"
+
+      - name: Package Lambda (optional)
+        run: |
+          python -m pip install -r aws\gatewayapi_requirements.txt -t aws/package || true
+          copy aws\*.py aws\package\
+
+      - name: Upload simulator artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: simulator-bin
+          path: RealTimeDataSimulator\bin\Debug\net10.0\

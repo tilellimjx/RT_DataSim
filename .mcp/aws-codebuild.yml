@@ -1,0 +1,24 @@
+name: aws-codebuild-gatewayapi
+type: mcp/server
+description: "AWS CodeBuild project config for gatewayapi Lambda"
+buildspec: aws/gatewayapi_buildspec.yml
+
+environment:
+  image: aws/codebuild/standard:8.0
+  computeType: BUILD_GENERAL1_SMALL
+  privilegedMode: false
+
+artifacts:
+  files:
+    - '**/*'
+
+env:
+  AWS_S3_BUCKET: rt-json-data
+
+iam_policies:
+  - AmazonS3FullAccess
+  - CloudWatchLogsFullAccess
+
+notes:
+  - "Ensure the referenced S3 buckets (rt-json-data / rt-json-error-data) exist or override via env."
+  - "Buildspec installs Python deps and copies aws/*.py into artifacts."

@@ -1,0 +1,18 @@
+name: dotnet-runner
+type: mcp/server
+description: "Runner for building, testing, and running the simulator on Windows agents"
+commands:
+  restore: dotnet restore .\RealTimeDataSimulator\RealTimeDataSimulator.csproj
+  build: dotnet build .\RealTimeDataSimulator\RealTimeDataSimulator.csproj --no-restore
+  test: dotnet test --no-build
+  run_create: dotnet run --project .\RealTimeDataSimulator\RealTimeDataSimulator.csproj -- create
+  run_send: dotnet run --project .\RealTimeDataSimulator\RealTimeDataSimulator.csproj -- send
+  publish: dotnet publish -c Release -o publish .\RealTimeDataSimulator\RealTimeDataSimulator.csproj
+
+environment:
+  DATA_DIR: C:\Temp\data
+  HTTP_ENDPOINT: https://pqxu4yuom8.execute-api.us-east-2.amazonaws.com/version1
+
+notes:
+  - "Use a single, long-lived HttpClient in production to avoid socket exhaustion."
+  - "Make DATA_DIR configurable when adding integration tests or CI runners."
