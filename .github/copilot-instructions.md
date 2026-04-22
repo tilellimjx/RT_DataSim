@@ -11,6 +11,7 @@ Quick commands
   dotnet publish -c Release -o ./publish --project .\RealTimeDataSimulator\RealTimeDataSimulator.csproj
 - Python Lambda (local deps):
   pip install -r aws\gatewayapi_requirements.txt
+- Python runtime (when modifying Python code): Use Python 3.13.13 or greater locally and in CI. Update aws/gatewayapi_buildspec.yml accordingly.
 - CodeBuild: aws/gatewayapi_buildspec.yml present (used by pipeline/CodeBuild).
 
 Tests & linters

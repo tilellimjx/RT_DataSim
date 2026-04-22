@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.13.5
+      python: 3.13.13
     commands:
       # Refresh yum metadata
       - yum clean all
