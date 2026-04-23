@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.13.13
+    commands:
+      # Refresh yum metadata
+      - yum clean all
+
+      # Install Development Tools (gcc, make, etc.)
+      #- yum groupinstall -y "Development Tools"
+
+      - pip install -r aws/s3todb_requirements.txt -t .
+  build:
+    commands:
+      # Copy Lambda source code into root of build directory
+      - cp aws/s3todb.py .
+
+artifacts:
+  files:
+    - '**/*.py'
+  #base-directory: package
