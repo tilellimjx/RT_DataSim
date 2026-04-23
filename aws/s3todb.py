@@ -17,7 +17,7 @@ from __future__ import annotations
 import os
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Dict, Any, Optional
 
 import boto3
@@ -38,7 +38,7 @@ s3_client = boto3.client('s3')
 DB_HOST = os.environ.get('DB_HOST')
 DB_USER = os.environ.get('DB_USER')
 DB_PASS = os.environ.get('DB_PASS')
-DB_NAME = os.environ.get('DB_NAME', 'iot_data_db')
+DB_NAME = os.environ.get('DB_NAME', 'rt-sim-data')
 DB_PORT = int(os.environ.get('DB_PORT', '3306'))
 TABLE_NAME = os.environ.get('TABLE_NAME', 'telemetry')
 ERROR_BUCKET = os.environ.get('ERROR_BUCKET')  # optional
@@ -226,7 +226,7 @@ def write_error_to_s3(key_prefix: str, body: str):
 	if not ERROR_BUCKET:
 		logger.warning('No ERROR_BUCKET configured; skipping error payload write')
 		return
-	key = f"{key_prefix}-{datetime.utcnow().strftime('%Y%m%dT%H%M%S%f')}.txt"
+	key = f"{key_prefix}-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')}.txt"
 	try:
 		s3_client.put_object(Bucket=ERROR_BUCKET, Key=key, Body=body)
 		logger.info('Wrote error payload to s3://%s/%s', ERROR_BUCKET, key)

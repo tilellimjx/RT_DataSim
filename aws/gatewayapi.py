@@ -1,5 +1,5 @@
 # Lambda handler: normalize incoming event to JSON and write to S3 with basic error handling
-from datetime import datetime
+from datetime import datetime, timezone
 import boto3
 import json
 import botocore.exceptions
@@ -11,7 +11,7 @@ ERROR_BUCKET = 'rt-json-error-data'
 
 
 def lambda_function(event, context):
-    ts = datetime.utcnow().isoformat(timespec='milliseconds')
+    ts = datetime.now(timezone.utc).isoformat(timespec='milliseconds')
 
     # Normalize event into a compact JSON string; if event is already a str/bytes, reuse/convert it
     try:
